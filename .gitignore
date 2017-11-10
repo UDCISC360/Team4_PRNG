@@ -1,0 +1,5 @@
+*.so
+*.exec
+*.exe
+*.o
+output_files/*
