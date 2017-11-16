@@ -24,7 +24,7 @@ def main():
     seedPtr = ctypes.pointer(seed)
 
     if testing:
-        testPRNGs(prngList, seedPtr, numRandNums[16])
+        testPRNGs(prngList, seedPtr, numRandNumsList[16])
     else:
         print "Need to implement timing"
 
