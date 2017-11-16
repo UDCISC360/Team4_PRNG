@@ -5,7 +5,9 @@ from pprint import pprint
 
 def main():
     numTrials = 10
-    numRandNums = 2 ** 16
+    numRandNumsList = [2 ** 1, 2 ** 2, 2 ** 3, 2 ** 4, 2 ** 5, 2 ** 6,
+                       2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10, 2 ** 11, 2 ** 12,
+                       2 ** 13, 2 ** 14, 2 ** 15, 2 ** 16]
     seed = 1000
     testing = True
 
@@ -22,7 +24,7 @@ def main():
     seedPtr = ctypes.pointer(seed)
 
     if testing:
-        testPRNGs(prngList, seedPtr, numRandNums)
+        testPRNGs(prngList, seedPtr, numRandNumsList[16])
     else:
         print "Need to implement timing"
 
