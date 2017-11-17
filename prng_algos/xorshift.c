@@ -1,14 +1,26 @@
 #include <stdint.h>
+#include <stdlib.h>
 
-/* The state word must be initialized to non-zero */
-uint32_t xorshift32(uint32_t state[static 1])
+static uint32_t state = 0;
+
+/* This xorshift32 function is a basic one taken from Wikipedia.
+ * See https://en.wikipedia.org/wiki/Xorshift for more information.
+ * With xorshift32 the state and seed are the same type. On
+ * the first call, xorshift32 sets the initial state to be the seed value.
+ * On continued calls the function cycles through states through a series
+ * of bit shifts and XOR operations. The new state is the outputted random
+ * number.
+ * NOTE: seed must not be equal to 0
+ */
+uint32_t xorshift32(uint32_t seed)
 {
-	/* Algorithm "xor" from p. 4 of Marsaglia, "Xorshift RNGs" */
+    if(state == 0)
+    {
+        state = seed;
+    }
 
-	uint32_t x = state[0];
-	x ^= x << 13;
-	x ^= x >> 17;
-	x ^= x << 5;
-	state[0] = x;
-	return x;
+	state ^= state << 13;
+	state ^= state >> 17;
+	state ^= state << 5;
+	return state;
 }
