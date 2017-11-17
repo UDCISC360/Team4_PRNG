@@ -6,7 +6,13 @@ static uint32_t lag2 = 0;
 static uint32_t modval = 0;
 static uint32_t* state;
 
-/* NOTE: seedlag1 should be less than seedlag2
+/*
+ * The Lagged Fibonacci Generator has a state that is an array of lag2
+ * elements. The state begins as initvals. To produce a new random number,
+ * the function returns the sum of state[lag2-lag1] and state[0] and mods
+ * it by modval. It then shift all the states left by 1 to add the new
+ * values to the state values.
+ * NOTE: seedlag1 should be less than seedlag2
  *       seedmodval should be a power of 2
  *       initvals should be an array with seedlag2 elements
  */
