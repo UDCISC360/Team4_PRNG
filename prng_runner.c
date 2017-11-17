@@ -5,7 +5,8 @@
 #include <math.h>
 #include "libourprng.h"
 
-double nrandnums = 65536;
+//long nrandnums = 33554432;
+unsigned long nrandnums = 4294967296;
 uint32_t modval = 4294967296 - 1;
 
 uint32_t lcg_seed = 1000;
@@ -90,7 +91,27 @@ void test_lfg()
 
 int main(int argc, char** argv)
 {
-    test_xorshift32();
-    test_lfg();
-    test_lcg();
+    prng = argv[1];
+
+    if(strcmp(prng, "xorshift"))
+    {
+        printf("Generating %l random numbers with xorshift32 \n",
+               nrandnums);
+        fflush(stdout);
+        test_xorshift32();
+    }
+
+    if(strcmp(prng, "lfg"))
+    {
+        printf("Generating %l random numbers with lfg \n", nrandnums);
+        fflush(stdout);
+        test_lfg();
+    }
+
+    if(strcmp(prng, "lcg"))
+    {
+        printf("Generating %l random numbers with lcg \n", nrandnums);
+        fflush(stdout);
+        test_lcg();
+    }
 }
