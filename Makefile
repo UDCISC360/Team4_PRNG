@@ -16,7 +16,8 @@ LIBSDIR = prng_libs
 libourprng: $(ALGODIR)/xorshift.c
 	$(GCC) $(FLAGS) -c -o $(ALGODIR)/xorshift.o -fPIC $(ALGODIR)/xorshift.c $(LIBS)
 	$(GCC) $(FLAGS) -c -o $(ALGODIR)/lfg.o -fPIC $(ALGODIR)/lfg.c $(LIBS)
-	$(GCC) $(FLAGS) -shared -o libourprng.so $(ALGODIR)/xorshift.o $(ALGODIR)/lfg.o $(LIBS)
+	$(GCC) $(FLAGS) -c -o $(ALGODIR)/lcg.o -fPIC $(ALGODIR)/lcg.c $(LIBS)
+	$(GCC) $(FLAGS) -shared -o libourprng.so $(ALGODIR)/xorshift.o $(ALGODIR)/lfg.o $(ALGODIR)/lcg.o $(LIBS)
 
 runner: libourprng prng_runner.c
 	$(GCC) $(FLAGS) -o runner.exec prng_runner.c -L/Users/Ameha/Desktop/gifan/360_stuff -lourprng $(LIBS)
