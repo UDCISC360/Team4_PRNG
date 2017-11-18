@@ -34,7 +34,7 @@ void test_prng(char* prng)
                nrandnums);
         fflush(stdout);
 
-        filepntr = fopen("output_files/xorshift_out.txt", mode);
+        filepntr = fopen("xorshift_out.txt", mode);
         for(int i = 0; i < nrandnums; i++)
         {
             fprintf(filepntr, "%" PRIu32 "\n",
@@ -46,7 +46,7 @@ void test_prng(char* prng)
         printf("Generating %llu random numbers with lfg \n", nrandnums);
         fflush(stdout);
 
-        filepntr = fopen("output_files/lfg_out.txt", mode);
+        filepntr = fopen("lfg_out.txt", mode);
         for(int i = 0; i < nrandnums; i++)
         {
             fprintf(filepntr, "%" PRIu32 "\n",
@@ -58,7 +58,7 @@ void test_prng(char* prng)
         printf("Generating %llu random numbers with lcg \n", nrandnums);
         fflush(stdout);
 
-        filepntr = fopen("output_files/lcg_out.txt", mode);
+        filepntr = fopen("lcg_out.txt", mode);
         for(int i = 0; i < nrandnums; i++)
         {
             fprintf(filepntr, "%" PRIu32 "\n",
