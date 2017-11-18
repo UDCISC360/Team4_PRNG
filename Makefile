@@ -12,7 +12,7 @@ GCC = gcc -pedantic -std=c11
 MINGW-AR = x86_64-w64-mingw32-gcc-ar rcs
 AR = ar rcs
 LIBS = -lm
-FLAGS = -Wall
+FLAGS = -Wall -g
 ALGODIR = prng_algos
 LIBSDIR = prng_libs
 CWD = "/home/gifan/Resources/Data/School Stuff/College/Cisc 360/project/CISC360-Project"
