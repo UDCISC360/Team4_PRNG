@@ -6,7 +6,7 @@
 #include <string.h>
 #include "libourprng.h"
 
-unsigned long nrandnums;
+unsigned long long nrandnums;
 uint32_t modval = 4294967296 - 1;
 
 uint32_t lcg_seed = 1000;
@@ -30,7 +30,7 @@ void test_prng(char* prng)
 
     if(!strcmp(prng, "xorshift"))
     {
-        printf("Generating %lu random numbers with xorshift32 \n",
+        printf("Generating %llu random numbers with xorshift32 \n",
                nrandnums);
         fflush(stdout);
 
@@ -43,7 +43,7 @@ void test_prng(char* prng)
     }
     else if(!strcmp(prng, "lfg"))
     {
-        printf("Generating %lu random numbers with lfg \n", nrandnums);
+        printf("Generating %llu random numbers with lfg \n", nrandnums);
         fflush(stdout);
 
         filepntr = fopen("output_files/lfg_out.txt", mode);
@@ -55,7 +55,7 @@ void test_prng(char* prng)
     }
     else if(!strcmp(prng, "lcg"))
     {
-        printf("Generating %lu random numbers with lcg \n", nrandnums);
+        printf("Generating %llu random numbers with lcg \n", nrandnums);
         fflush(stdout);
 
         filepntr = fopen("output_files/lcg_out.txt", mode);
@@ -67,7 +67,7 @@ void test_prng(char* prng)
     }
     else if(!strcmp(prng, "twister"))
     {
-        printf("Generating %lu random numbers with twister \n", nrandnums);
+        printf("Generating %llu random numbers with twister \n", nrandnums);
         fflush(stdout);
     }
 }
@@ -76,7 +76,7 @@ void experiment_prng(char* prng)
 {
     if(!strcmp(prng, "xorshift"))
     {
-        printf("Generating %lu random numbers with xorshift32 \n",
+        printf("Generating %llu random numbers with xorshift32 \n",
                nrandnums);
         fflush(stdout);
 
@@ -87,7 +87,7 @@ void experiment_prng(char* prng)
     }
     else if(!strcmp(prng, "lfg"))
     {
-        printf("Generating %lu random numbers with lfg \n", nrandnums);
+        printf("Generating %llu random numbers with lfg \n", nrandnums);
         fflush(stdout);
 
         for(int i = 0; i < nrandnums; i++)
@@ -97,7 +97,7 @@ void experiment_prng(char* prng)
     }
     else if(!strcmp(prng, "lcg"))
     {
-        printf("Generating %lu random numbers with lcg \n", nrandnums);
+        printf("Generating %llu random numbers with lcg \n", nrandnums);
         fflush(stdout);
 
         for(int i = 0; i < nrandnums; i++)
@@ -107,7 +107,7 @@ void experiment_prng(char* prng)
     }
     else if(!strcmp(prng, "twister"))
     {
-        printf("Generating %lu random numbers with twister \n", nrandnums);
+        printf("Generating %llu random numbers with twister \n", nrandnums);
         fflush(stdout);
     }
 }
