@@ -3,3 +3,4 @@
 *.exe
 *.o
 output_files/*
+*.DS_Store
