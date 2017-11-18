@@ -3,10 +3,11 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <math.h>
+#include <string.h>
 #include "libourprng.h"
 
-//long nrandnums = 33554432;
-unsigned long nrandnums = 4294967296;
+unsigned long nrandnums = 33554432;
+//unsigned long nrandnums = 4294967296;
 uint32_t modval = 4294967296 - 1;
 
 uint32_t lcg_seed = 1000;
@@ -91,26 +92,25 @@ void test_lfg()
 
 int main(int argc, char** argv)
 {
-    prng = argv[1];
+    char* prng = argv[1];
 
-    if(strcmp(prng, "xorshift"))
+    if(!strcmp(prng, "xorshift"))
     {
-        printf("Generating %l random numbers with xorshift32 \n",
+        printf("Generating %lu random numbers with xorshift32 \n",
                nrandnums);
         fflush(stdout);
         test_xorshift32();
     }
-
-    if(strcmp(prng, "lfg"))
+    else if(!strcmp(prng, "lfg"))
     {
-        printf("Generating %l random numbers with lfg \n", nrandnums);
+        printf("Generating %lu random numbers with lfg \n", nrandnums);
         fflush(stdout);
         test_lfg();
     }
 
-    if(strcmp(prng, "lcg"))
+    else if(!strcmp(prng, "lcg"))
     {
-        printf("Generating %l random numbers with lcg \n", nrandnums);
+        printf("Generating %lu random numbers with lcg \n", nrandnums);
         fflush(stdout);
         test_lcg();
     }
