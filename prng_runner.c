@@ -6,8 +6,7 @@
 #include <string.h>
 #include "libourprng.h"
 
-unsigned long nrandnums = 33554432;
-//unsigned long nrandnums = 4294967296;
+unsigned long nrandnums;
 uint32_t modval = 4294967296 - 1;
 
 uint32_t lcg_seed = 1000;
@@ -24,94 +23,110 @@ uint32_t lag2 = 17;
 uint32_t initvals[] = {2, 3, 5, 7, 11, 13, 17, 19, 23,
                        29, 31, 37, 41, 43, 47, 53, 59};
 
-void test_lcg()
-{
-   FILE* filepntr;
-   char* mode = "w";
-
-   // Code to output numbers for xorshift32
-   filepntr = fopen("output_files/c_lcg_out.txt", mode);
-   if (filepntr == NULL)
-   {
-       fprintf(stderr, "Can't open output file! \n");
-       exit(1);
-   }
-   else
-   {
-       for(int i = 0; i < nrandnums; i++)
-       {
-           fprintf(filepntr, "%" PRIu32 "\n",
-                   lcg(&lcg_seed, &modval, &multfactor, &addfactor));
-       }
-   }
-}
-
-void test_xorshift32()
+void test_prng(char* prng)
 {
     FILE* filepntr;
     char* mode = "w";
-
-    // Code to output numbers for xorshift32
-    filepntr = fopen("output_files/c_xorshift32_out.txt", mode);
-    if (filepntr == NULL)
-    {
-        fprintf(stderr, "Can't open output file! \n");
-        exit(1);
-    }
-    else
-    {
-        for(int i = 0; i < nrandnums; i++)
-        {
-            fprintf(filepntr, "%" PRIu32 "\n",
-                    xorshift32(&xorshift32_seed, &shift1, &shift2, &shift3));
-        }
-    }
-}
-
-void test_lfg()
-{
-    FILE* filepntr;
-    char* mode = "w";
-
-    // Code to output numbers for xorshift32
-    filepntr = fopen("output_files/c_lfg_out.txt", mode);
-    if (filepntr == NULL)
-    {
-        fprintf(stderr, "Can't open output file! \n");
-        exit(1);
-    }
-    else
-    {
-        for(int i = 0; i < nrandnums; i++)
-        {
-            fprintf(filepntr, "%" PRIu32 "\n",
-                    lfg(&lag1, &lag2, &modval, initvals));
-        }
-    }
-}
-
-int main(int argc, char** argv)
-{
-    char* prng = argv[1];
 
     if(!strcmp(prng, "xorshift"))
     {
         printf("Generating %lu random numbers with xorshift32 \n",
                nrandnums);
         fflush(stdout);
-        test_xorshift32();
+
+        filepntr = fopen("output_files/xorshift_out.txt", mode);
+        for(int i = 0; i < nrandnums; i++)
+        {
+            fprintf(filepntr, "%" PRIu32 "\n",
+                    xorshift32(&xorshift32_seed, &shift1, &shift2, &shift3));
+        }
     }
     else if(!strcmp(prng, "lfg"))
     {
         printf("Generating %lu random numbers with lfg \n", nrandnums);
         fflush(stdout);
-        test_lfg();
-    }
 
+        filepntr = fopen("output_files/lfg_out.txt", mode);
+        for(int i = 0; i < nrandnums; i++)
+        {
+            fprintf(filepntr, "%" PRIu32 "\n",
+                    lfg(&lag1, &lag2, &modval, initvals));
+        }
+    }
     else if(!strcmp(prng, "lcg"))
     {
         printf("Generating %lu random numbers with lcg \n", nrandnums);
         fflush(stdout);
-        test_lcg();
+
+        filepntr = fopen("output_files/lcg_out.txt", mode);
+        for(int i = 0; i < nrandnums; i++)
+        {
+            fprintf(filepntr, "%" PRIu32 "\n",
+                    lcg(&lcg_seed, &modval, &multfactor, &addfactor));
+        }
     }
+    else if(!strcmp(prng, "twister"))
+    {
+        printf("Generating %lu random numbers with twister \n", nrandnums);
+        fflush(stdout);
+    }
+}
+
+void experiment_prng(char* prng)
+{
+    if(!strcmp(prng, "xorshift"))
+    {
+        printf("Generating %lu random numbers with xorshift32 \n",
+               nrandnums);
+        fflush(stdout);
+
+        for(int i = 0; i < nrandnums; i++)
+        {
+            xorshift32(&xorshift32_seed, &shift1, &shift2, &shift3);
+        }
+    }
+    else if(!strcmp(prng, "lfg"))
+    {
+        printf("Generating %lu random numbers with lfg \n", nrandnums);
+        fflush(stdout);
+
+        for(int i = 0; i < nrandnums; i++)
+        {
+            lfg(&lag1, &lag2, &modval, initvals);
+        }
+    }
+    else if(!strcmp(prng, "lcg"))
+    {
+        printf("Generating %lu random numbers with lcg \n", nrandnums);
+        fflush(stdout);
+
+        for(int i = 0; i < nrandnums; i++)
+        {
+            lcg(&lcg_seed, &modval, &multfactor, &addfactor);
+        }
+    }
+    else if(!strcmp(prng, "twister"))
+    {
+        printf("Generating %lu random numbers with twister \n", nrandnums);
+        fflush(stdout);
+    }
+}
+
+int main(int argc, char** argv)
+{
+    char* prng = argv[1];
+    char* teststr = argv[2];
+
+    if(!strcmp(teststr, "test"))
+    {
+        nrandnums = 65536;
+        test_prng(prng);
+    }
+    else
+    {
+        nrandnums = 4294967296;
+        experiment_prng(prng);
+    }
+
+    return 0;
 }
