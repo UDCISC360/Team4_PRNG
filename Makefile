@@ -29,7 +29,7 @@ libourprng: $(ALGODIR)/xorshift.c $(ALGODIR)/lfg.c $(ALGODIR)/lcg.c libourprng.h
 	$(AR) -o libourprng.a $(ALGODIR)/xorshift.o $(ALGODIR)/lfg.o $(ALGODIR)/lcg.o
 
 runnerwin: libourprngwin prng_runner.c
-	$(MINGW) $(FLAGS) -o runnerwin.exe prng_runner.c -L"/home/gifan/Resources/Data/School Stuff/College/Cisc 360/project/CISC360-Project" -lourprng $(LIBS)
+	$(MINGW) $(FLAGS) -o runnerwin.exe prng_runner.c -L"/home/gifan/Resources/Data/School Stuff/College/Cisc 360/project/CISC360-Project" -lourprngwin $(LIBS)
 
 runner: libourprng prng_runner.c
 	$(GCC) $(FLAGS) -o runner.exe prng_runner.c -L"/home/gifan/Resources/Data/School Stuff/College/Cisc 360/project/CISC360-Project" -lourprng $(LIBS)

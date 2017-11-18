@@ -2,5 +2,6 @@
 *.exec
 *.exe
 *.o
+*.a
 output_files/*
 *.DS_Store
