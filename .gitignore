@@ -1,6 +1,4 @@
 *.so
-*.exec
-*.exe
 *.o
 *.a
 output_files/*
