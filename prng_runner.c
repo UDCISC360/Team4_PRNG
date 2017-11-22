@@ -100,6 +100,8 @@ void test_prng(char* prng)
                     icg(&icg_seed, &icg_modval, &icg_multfactor, &icg_addfactor));
         }
     }
+	
+	fclose(filepntr);
 }
 
 void experiment_prng(char* prng)
