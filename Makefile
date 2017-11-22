@@ -49,6 +49,9 @@ test-lcg: runner
 test-twister: runner
 	./runner.exe twister test
 
+test-icg: runner
+	./runner.exe icg test
+
 experiment-xorshift: runner
 	./runner.exe xorshift notest
 
@@ -59,4 +62,7 @@ experiment-lcg: runner
 	./runner.exe lcg notest
 
 experiment-twister: runner
+	./runner.exe twister notest
+	
+experiment-icg: runner
 	./runner.exe twister notest

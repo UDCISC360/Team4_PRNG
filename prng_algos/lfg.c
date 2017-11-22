@@ -3,8 +3,9 @@
 /*
  * The Lagged Fibonacci Generator has a state that is an array of lag2
  * elements. The state begins as initvals. To produce a new random number,
- * the function returns the sum of state[lag2-lag1] and state[0] and mods
- * it by modval. It then shift all the states left by 1 to add the new
+ * the function returns
+ *     (state[lag2-lag1] + state[0]) mod modval
+ * It then shift all the states left by 1 to add the new
  * values to the state values.
  * NOTE: lag1 should be less than lag2
  *       modval should be a power of 2 minus 1

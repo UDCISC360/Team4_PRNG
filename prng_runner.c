@@ -7,11 +7,13 @@
 #include "libourprng.h"
 
 unsigned long long nrandnums;
+// Uses a power of 2 minus 1 since algorithms use bitwise and
+// rather than the modulo operator.
 uint32_t modval = 4294967296 - 1;
 
 uint32_t lcg_seed = 1000;
-uint32_t multfactor = 13425235;
-uint32_t addfactor = 156674;
+uint32_t lcg_multfactor = 13425235;
+uint32_t lcg_addfactor = 156674;
 
 uint32_t xorshift32_seed = 1000;
 uint32_t shift1 = 13;
@@ -22,6 +24,13 @@ uint32_t lag1 = 5;
 uint32_t lag2 = 17;
 uint32_t initvals[] = {2, 3, 5, 7, 11, 13, 17, 19, 23,
                        29, 31, 37, 41, 43, 47, 53, 59};
+
+uint32_t icg_seed = 1000;					   
+uint32_t icg_multfactor = 71499791;
+uint32_t icg_addfactor = 21916;
+// Note that icg requires a prime value to mod by.
+// 2^32 - 5) is the prime closest to 2^32
+uint32_t icg_modval = 4294967291;
 
 void test_prng(char* prng)
 {
@@ -62,13 +71,25 @@ void test_prng(char* prng)
         for(int i = 0; i < nrandnums; i++)
         {
             fprintf(filepntr, "%" PRIu32 "\n",
-                    lcg(&lcg_seed, &modval, &multfactor, &addfactor));
+                    lcg(&lcg_seed, &modval, &lcg_multfactor, &lcg_addfactor));
         }
     }
     else if(!strcmp(prng, "twister"))
     {
         printf("Generating %llu random numbers with twister \n", nrandnums);
         fflush(stdout);
+    }
+	else if(!strcmp(prng, "icg"))
+    {
+        printf("Generating %llu random numbers with icg \n", nrandnums);
+        fflush(stdout);
+		
+		filepntr = fopen("icg_out.txt", mode);
+        for(int i = 0; i < nrandnums; i++)
+        {
+            fprintf(filepntr, "%" PRIu32 "\n",
+                    icg(&icg_seed, &icg_modval, &icg_multfactor, &icg_addfactor));
+        }
     }
 }
 
@@ -102,13 +123,23 @@ void experiment_prng(char* prng)
 
         for(unsigned long i = 0; i < nrandnums; i++)
         {
-            lcg(&lcg_seed, &modval, &multfactor, &addfactor);
+            lcg(&lcg_seed, &modval, &lcg_multfactor, &lcg_addfactor);
         }
     }
     else if(!strcmp(prng, "twister"))
     {
         printf("Generating %llu random numbers with twister \n", nrandnums);
         fflush(stdout);
+    }
+	else if(!strcmp(prng, "icg"))
+    {
+        printf("Generating %llu random numbers with icg \n", nrandnums);
+        fflush(stdout);
+		
+        for(int i = 0; i < nrandnums; i++)
+        {
+            icg(&icg_seed, &icg_modval, &icg_multfactor, &icg_addfactor);
+        }
     }
 }
 
