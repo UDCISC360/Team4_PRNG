@@ -21,13 +21,17 @@ libourprngwin: $(ALGODIR)/xorshift.c $(ALGODIR)/lfg.c $(ALGODIR)/lcg.c libourprn
 	$(MINGW) $(FLAGS) -c -o $(ALGODIR)/xorshift.o -fPIC $(ALGODIR)/xorshift.c $(LIBS)
 	$(MINGW) $(FLAGS) -c -o $(ALGODIR)/lfg.o -fPIC $(ALGODIR)/lfg.c $(LIBS)
 	$(MINGW) $(FLAGS) -c -o $(ALGODIR)/lcg.o -fPIC $(ALGODIR)/lcg.c $(LIBS)
-	$(MINGW-AR) -o libourprngwin.a $(ALGODIR)/xorshift.o $(ALGODIR)/lfg.o $(ALGODIR)/lcg.o
+	$(MINGW) $(FLAGS) -c -o $(ALGODIR)/twister.o -fPIC $(ALGODIR)/twister.c $(LIBS)
+	$(MINGW) $(FLAGS) -c -o $(ALGODIR)/icg.o -fPIC $(ALGODIR)/icg.c $(LIBS)
+	$(MINGW-AR) -o libourprngwin.a $(ALGODIR)/xorshift.o $(ALGODIR)/lfg.o $(ALGODIR)/lcg.o $(ALGODIR)/twister.o $(ALGODIR)/icg.o
 
 libourprng: $(ALGODIR)/xorshift.c $(ALGODIR)/lfg.c $(ALGODIR)/lcg.c libourprng.h
 	$(GCC) $(FLAGS) -c -o $(ALGODIR)/xorshift.o -fPIC $(ALGODIR)/xorshift.c $(LIBS)
 	$(GCC) $(FLAGS) -c -o $(ALGODIR)/lfg.o -fPIC $(ALGODIR)/lfg.c $(LIBS)
 	$(GCC) $(FLAGS) -c -o $(ALGODIR)/lcg.o -fPIC $(ALGODIR)/lcg.c $(LIBS)
-	$(AR) libourprng.a $(ALGODIR)/xorshift.o $(ALGODIR)/lfg.o $(ALGODIR)/lcg.o
+	$(GCC) $(FLAGS) -c -o $(ALGODIR)/twister.o -fPIC $(ALGODIR)/twister.c $(LIBS)
+	$(GCC) $(FLAGS) -c -o $(ALGODIR)/icg.o -fPIC $(ALGODIR)/icg.c $(LIBS)
+	$(AR) libourprng.a $(ALGODIR)/xorshift.o $(ALGODIR)/lfg.o $(ALGODIR)/lcg.o $(ALGODIR)/twister.o $(ALGODIR)/icg.o
 
 runnerwin: libourprngwin prng_runner.c
 	$(MINGW) $(FLAGS) -o runnerwin.exe prng_runner.c -L$(CWD) -lourprngwin $(LIBS)
