@@ -7,36 +7,36 @@
  */
 uint32_t mul_inv(uint32_t prev_remain, uint32_t curr_remain)
 {
-	uint32_t modval_orig = curr_remain;
-	uint32_t temp;
-	uint32_t curr_quot;
-	uint32_t curr_inverse = 0;
-	uint32_t prev_inverse = 1;
-	
-	if (curr_remain == 1)
-    {		
-		return 1;
-	}
-	
-	while (prev_remain > 0)
-	{
-		curr_quot = prev_remain / curr_remain;
-		
-		temp = curr_remain;
-		curr_remain = prev_remain % curr_remain;
-		prev_remain = temp;
-		
-		temp = curr_inverse;
-		curr_inverse = prev_inverse - curr_quot * curr_inverse;
-		prev_inverse = temp;
-	}
-	
-	if (prev_inverse < 0)
-	{
-		prev_inverse += modval_orig;
-	}
-	
-	return prev_inverse;
+    uint32_t modval_orig = curr_remain;
+    uint32_t temp;
+    uint32_t curr_quot;
+    uint32_t curr_inverse = 0;
+    uint32_t prev_inverse = 1;
+    
+    if (curr_remain == 1)
+    {       
+        return 1;
+    }
+    
+    while (curr_remain > 0)
+    {
+        curr_quot = prev_remain / curr_remain;
+
+        temp = curr_remain;
+        curr_remain = prev_remain % curr_remain;
+        prev_remain = temp;
+        
+        temp = curr_inverse;
+        curr_inverse = prev_inverse - curr_quot * curr_inverse;
+        prev_inverse = temp;
+    }
+    
+    if (prev_inverse < 0)
+    {
+        prev_inverse += modval_orig;
+    }
+    
+    return prev_inverse;
 }
 
 /*
@@ -52,13 +52,14 @@ uint32_t mul_inv(uint32_t prev_remain, uint32_t curr_remain)
 uint32_t icg(uint32_t* state, uint32_t* modval, uint32_t* multfactor,
              uint32_t* addfactor)
 {
-	if(*state == 0)
-	{
-		return *addfactor;
-	}
-	else
-	{
-		uint32_t inverse = mul_inv(*state, *modval);
-		return ((inverse * (*multfactor)) + *addfactor) % *modval;
-	}
+    if(*state == 0)
+    {
+        return *addfactor;
+    }
+    else
+    {
+        uint32_t inverse = mul_inv(*state, *modval);
+        *state = ((inverse * (*multfactor)) + *addfactor) % *modval;
+        return *state;
+    }
 }

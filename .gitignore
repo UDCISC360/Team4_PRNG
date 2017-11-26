@@ -3,3 +3,4 @@
 *.a
 output_files/*
 *.DS_Store
+*.txt

@@ -26,8 +26,8 @@ uint32_t initvals[] = {2, 3, 5, 7, 11, 13, 17, 19, 23,
                        29, 31, 37, 41, 43, 47, 53, 59};
 
 uint32_t twister_seed = 93653;
-					   
-uint32_t icg_seed = 1000;					   
+                       
+uint32_t icg_seed = 1000;                      
 uint32_t icg_multfactor = 71499791;
 uint32_t icg_addfactor = 21916;
 // Note that icg requires a prime value to mod by.
@@ -80,28 +80,28 @@ void test_prng(char* prng)
     {
         printf("Generating %llu random numbers with twister \n", nrandnums);
         fflush(stdout);
-		
-		filepntr = fopen("twister_out.txt", mode);
+        
+        filepntr = fopen("twister_out.txt", mode);
         for(int i = 0; i < nrandnums; i++)
         {
             fprintf(filepntr, "%" PRIu32 "\n",
                     twister(&twister_seed));
         }
     }
-	else if(!strcmp(prng, "icg"))
+    else if(!strcmp(prng, "icg"))
     {
         printf("Generating %llu random numbers with icg \n", nrandnums);
         fflush(stdout);
-		
-		filepntr = fopen("icg_out.txt", mode);
+        
+        filepntr = fopen("icg_out.txt", mode);
         for(int i = 0; i < nrandnums; i++)
         {
             fprintf(filepntr, "%" PRIu32 "\n",
                     icg(&icg_seed, &icg_modval, &icg_multfactor, &icg_addfactor));
         }
     }
-	
-	fclose(filepntr);
+    
+    fclose(filepntr);
 }
 
 void experiment_prng(char* prng)
@@ -141,17 +141,17 @@ void experiment_prng(char* prng)
     {
         printf("Generating %llu random numbers with twister \n", nrandnums);
         fflush(stdout);
-		
-		for(unsigned long i = 0; i < nrandnums; i++)
+        
+        for(unsigned long i = 0; i < nrandnums; i++)
         {
             twister(&twister_seed);
         }
     }
-	else if(!strcmp(prng, "icg"))
+    else if(!strcmp(prng, "icg"))
     {
         printf("Generating %llu random numbers with icg \n", nrandnums);
         fflush(stdout);
-		
+        
         for(unsigned long i = 0; i < nrandnums; i++)
         {
             icg(&icg_seed, &icg_modval, &icg_multfactor, &icg_addfactor);
