@@ -112,7 +112,7 @@ void experiment_prng(char* prng)
                nrandnums);
         fflush(stdout);
 
-        for(unsigned long i = 0; i < nrandnums; i++)
+        for(unsigned long long i = 0; i < nrandnums; i++)
         {
             xorshift32(&xorshift32_seed, &shift1, &shift2, &shift3);
         }
@@ -122,7 +122,7 @@ void experiment_prng(char* prng)
         printf("Generating %llu random numbers with lfg \n", nrandnums);
         fflush(stdout);
 
-        for(unsigned long i = 0; i < nrandnums; i++)
+        for(unsigned long long i = 0; i < nrandnums; i++)
         {
             lfg(&lag1, &lag2, &modval, initvals);
         }
@@ -132,7 +132,7 @@ void experiment_prng(char* prng)
         printf("Generating %llu random numbers with lcg \n", nrandnums);
         fflush(stdout);
 
-        for(unsigned long i = 0; i < nrandnums; i++)
+        for(unsigned long long i = 0; i < nrandnums; i++)
         {
             lcg(&lcg_seed, &modval, &lcg_multfactor, &lcg_addfactor);
         }
@@ -142,7 +142,7 @@ void experiment_prng(char* prng)
         printf("Generating %llu random numbers with twister \n", nrandnums);
         fflush(stdout);
         
-        for(unsigned long i = 0; i < nrandnums; i++)
+        for(unsigned long long i = 0; i < nrandnums; i++)
         {
             twister(&twister_seed);
         }
@@ -152,7 +152,7 @@ void experiment_prng(char* prng)
         printf("Generating %llu random numbers with icg \n", nrandnums);
         fflush(stdout);
         
-        for(unsigned long i = 0; i < nrandnums; i++)
+        for(unsigned long long i = 0; i < nrandnums; i++)
         {
             icg(&icg_seed, &icg_modval, &icg_multfactor, &icg_addfactor);
         }
