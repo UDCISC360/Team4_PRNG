@@ -15,7 +15,7 @@ LIBS = -lm
 FLAGS = -Wall -g
 ALGODIR = prng_algos
 LIBSDIR = prng_libs
-CWD = "/home/gifan/Resources/Data/School Stuff/College/Cisc 360/project/CISC360-Project"
+CWD = "/home/mike/Documents/CISC360/prng/repo"
 
 libourprngwin: $(ALGODIR)/xorshift.c $(ALGODIR)/lfg.c $(ALGODIR)/lcg.c libourprng.h
 	$(MINGW) $(FLAGS) -c -o $(ALGODIR)/xorshift.o -fPIC $(ALGODIR)/xorshift.c $(LIBS)
