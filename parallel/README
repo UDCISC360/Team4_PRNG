@@ -1,0 +1,4 @@
+Sequential: make seq
+MPI only: make mpionly
+CUDA only: make cudaonly
+CUDA/OpenMP hybrid: make hyrbid
