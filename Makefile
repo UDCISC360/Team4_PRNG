@@ -70,3 +70,6 @@ experiment-twister: runner
 	
 experiment-icg: runner
 	./runner.exe twister notest
+
+clean: Makefile
+	rm *.exe */*.o *.a
